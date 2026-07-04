@@ -215,6 +215,7 @@ func (s *UninstallerService) cleanupIPSet() {
 
 func (s *UninstallerService) removeArtifacts(removeLogs bool) {
 	paths := []string{
+		"/usr/local/bin/traffic-guard",
 		IpsetRestoreServicePath,
 		MoveRulesServicePath,
 		AggregateLogsServicePath,
