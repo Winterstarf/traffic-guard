@@ -165,9 +165,20 @@ func (s *IptablesService) removeManagedBlock(content, startMarker string) string
 		}
 
 		end := start + endRel + len(endMarker)
+		
 		// Skip trailing newlines
 		for end < len(content) && (content[end] == '\n' || content[end] == '\r') {
 			end++
+		}
+
+		// Remove one leading newline if exists
+		if start > 0 && content[start-1] == '\n' {
+			start--
+			if start > 0 && content[start-1] == '\r' {
+				start--
+			}
+		} else if start > 0 && content[start-1] == '\r' {
+			start--
 		}
 
 		content = content[:start] + content[end:]
